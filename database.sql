@@ -71,7 +71,11 @@ INSERT INTO diseases (name, description, solution, prevention) VALUES
 ('Jamur Upas (Pink Disease)',
  'Disebabkan oleh jamur Upasia salmonicolor, ditandai dengan adanya lapisan merah jambu pada batang atau cabang.',
  '1. Potong cabang yang mati atau terinfeksi parah.\n2. Kerok bagian yang terserang dan olesi dengan fungisida atau cat/bubur bordeaux.\n3. Bersihkan area sekitar tanaman dari gulma yang rimbun.',
- '1. Kurangi kepadatan tajuk melalui pemangkasan.\n2. Perbaiki sanitasi kebun.\n3. Pengamatan rutin terutama pada musim penghujan.');
+ '1. Kurangi kepadatan tajuk melalui pemangkasan.\n2. Perbaiki sanitasi kebun.\n3. Pengamatan rutin terutama pada musim penghujan.'),
+('Hama Penghisap Buah (Helopeltis spp.)',
+ 'Helopeltis spp. adalah hama penghisap yang menyerang buah muda dan tunas muda kakao. Serangannya menyebabkan bercak-bercak cekung yang dapat menghambat pertumbuhan buah.',
+ '1. Pengendalian secara biologis dengan menggunakan semut hitam (Dolichoderus thoracicus).\n2. Jika serangan sudah melewati ambang batas, gunakan insektisida nabati atau kimia yang direkomendasikan.\n3. Sanitasi kebun untuk mengurangi tempat persembunyian hama.',
+ '1. Pemangkasan untuk mengatur kelembaban dan cahaya matahari.\n2. Pemupukan yang seimbang agar tanaman lebih tahan terhadap serangan.\n3. Monitor keberadaan hama secara rutin terutama pada tunas dan buah muda.');
 
 -- Insert Data: Symptoms
 INSERT INTO symptoms (code, name, category) VALUES
@@ -95,7 +99,10 @@ INSERT INTO symptoms (code, name, category) VALUES
 ('G18', 'Buah muda mengkerut dan kering (cherelle wilt)', 'Buah'),
 ('G19', 'Terdapat benang-benang putih seperti sarang laba-laba pada cabang', 'Batang'),
 ('G20', 'Cabang yang terinfeksi berubah warna menjadi merah muda', 'Batang'),
-('G21', 'Kulit cabang pecah-pecah dan mengelupas', 'Batang');
+('G21', 'Kulit cabang pecah-pecah dan mengelupas', 'Batang'),
+('G22', 'Bercak cekung coklat kehitaman pada kulit buah', 'Buah'),
+('G23', 'Tunas muda mengering dan mati (pucuk mati)', 'Batang'),
+('G24', 'Buah muda berubah bentuk (distorsi/bengkok)', 'Buah');
 
 -- Insert Data: Rules (Expert CF)
 INSERT INTO rules (disease_id, symptom_id, cf_expert) VALUES
@@ -104,7 +111,8 @@ INSERT INTO rules (disease_id, symptom_id, cf_expert) VALUES
 (3, 9, 0.8), (3, 10, 0.9), (3, 11, 0.6), (3, 12, 0.7), -- PBK
 (4, 13, 0.9), (4, 14, 0.8), (4, 15, 0.9), -- Kanker Batang
 (5, 16, 0.7), (5, 17, 0.6), (5, 18, 0.8), -- Antraknosa
-(6, 19, 0.8), (6, 20, 0.9), (6, 21, 0.7); -- Jamur Upas
+(6, 19, 0.8), (6, 20, 0.9), (6, 21, 0.7), -- Jamur Upas
+(7, 22, 0.9), (7, 23, 0.7), (7, 24, 0.8); -- Helopeltis
 
 -- Insert Admin User (password: admin123)
 INSERT INTO users (username, password) VALUES ('admin', '$2y$10$xevtMEkXJgkeRHh56IsbDeXSxU0gwj4mp56sMdaIsESkWlgiapPZO');
