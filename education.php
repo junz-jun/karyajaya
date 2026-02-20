@@ -1,23 +1,7 @@
 <?php include 'includes/header.php'; ?>
 
 <div class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 w-full bg-surface-light dark:bg-surface-dark border-b border-gray-100 dark:border-gray-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-2">
-                    <div class="size-8 text-primary">
-                        <span class="material-symbols-outlined text-3xl">spa</span>
-                    </div>
-                    <h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Edukasi Kakao</h2>
-                </div>
-                <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-slate-600 dark:text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="index.php">Beranda</a>
-                    <a class="text-slate-600 dark:text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="diagnosis.php">Diagnosa</a>
-                    <a class="text-primary font-bold text-sm transition-colors" href="education.php">Edukasi & Tips</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <?php include 'includes/navbar.php'; ?>
     <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
          <section class="w-full bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
             <div class="flex flex-col lg:flex-row gap-0 lg:gap-8">

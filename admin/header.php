@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -25,9 +28,9 @@
         }
     </script>
 </head>
-<body class="bg-background-dark text-slate-100 font-display flex h-screen overflow-hidden">
+<body class="bg-background-dark text-slate-100 font-display flex h-screen overflow-hidden relative">
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 <?php
-session_start();
 if (!isset($_SESSION['admin_logged_in']) && basename($_SERVER['PHP_SELF']) != 'login.php') {
     header("Location: login.php");
     exit;
@@ -35,7 +38,7 @@ if (!isset($_SESSION['admin_logged_in']) && basename($_SERVER['PHP_SELF']) != 'l
 include_once __DIR__ . '/../includes/functions.php';
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-<aside class="w-64 flex-shrink-0 flex flex-col justify-between border-r border-[#29382e] bg-background-dark h-full">
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-background-dark border-r border-[#29382e] flex-shrink-0 flex flex-col justify-between h-full transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300 ease-in-out">
     <div class="flex flex-col gap-4 p-4">
         <div class="flex items-center gap-3 mb-6">
             <div class="flex items-center justify-center bg-surface-highlight rounded-lg size-10 border border-[#29382e] text-primary">
@@ -72,4 +75,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 </aside>
-<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<main class="flex-1 flex flex-col h-full overflow-hidden relative w-full">
+    <!-- Mobile Header -->
+    <header class="h-16 border-b border-[#29382e] flex items-center px-4 bg-background-dark md:hidden z-30 flex-shrink-0">
+        <button id="sidebar-toggle" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors">
+            <span class="material-symbols-outlined text-[28px]">menu</span>
+        </button>
+        <span class="ml-3 font-bold text-white text-lg">Admin KJ</span>
+    </header>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if (sidebarToggle && sidebar && overlay) {
+            const toggleSidebar = () => {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            };
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+        }
+    });
+    </script>

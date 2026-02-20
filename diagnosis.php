@@ -5,7 +5,10 @@ include 'includes/header.php';
 ?>
 
 <div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased min-h-screen flex">
-    <aside class="w-64 bg-[#111813] border-r border-border-dark flex-shrink-0 flex flex-col justify-between h-full hidden md:flex sticky top-0">
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#111813] border-r border-border-dark flex-shrink-0 flex flex-col justify-between h-full transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300 ease-in-out">
         <div class="flex flex-col p-4 gap-6">
             <div class="flex items-center gap-3 px-2">
                 <div class="bg-primary/20 p-2 rounded-lg text-primary">
@@ -41,11 +44,14 @@ include 'includes/header.php';
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col min-h-screen relative">
-        <header class="h-16 border-b border-border-dark flex items-center justify-between px-6 bg-[#111813] z-10 sticky top-0">
+    <main class="flex-1 flex flex-col min-h-screen relative overflow-x-hidden">
+        <header class="h-16 border-b border-border-dark flex items-center justify-between px-4 md:px-6 bg-[#111813] z-30 sticky top-0">
             <div class="flex items-center gap-4">
+                <button id="sidebar-toggle" class="md:hidden text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
                 <div class="flex items-center text-sm text-slate-400">
-                    <span>Aplikasi</span>
+                    <span class="hidden xs:inline">Aplikasi</span>
                     <span class="material-symbols-outlined text-[16px] mx-2">chevron_right</span>
                     <span class="text-white font-medium">Diagnosa Baru</span>
                 </div>
@@ -124,4 +130,22 @@ include 'includes/header.php';
     </main>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (sidebarToggle && sidebar && overlay) {
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        };
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    }
+});
+</script>
 <?php include 'includes/footer.php'; ?>
