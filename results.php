@@ -26,21 +26,7 @@ include 'includes/header.php';
 ?>
 
 <div class="bg-background-light dark:bg-background-dark min-h-screen font-display flex flex-col text-slate-900 dark:text-slate-100 overflow-x-hidden">
-    <nav class="sticky top-0 z-50 border-b border-[#29382e] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-4 md:px-10 py-3">
-        <div class="max-w-[1280px] mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="size-8 text-primary">
-                    <span class="material-symbols-outlined text-3xl">local_florist</span>
-                </div>
-                <h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Hasil Diagnosa</h2>
-            </div>
-             <div class="hidden md:flex items-center gap-8">
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="index.php">Beranda</a>
-                <a class="text-primary font-bold text-sm leading-normal border-b-2 border-primary" href="diagnosis.php">Diagnosa Ulang</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="history.php">Riwayat</a>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/navbar.php'; ?>
 
     <main class="flex-grow w-full max-w-[1280px] mx-auto p-4 md:p-8 lg:p-12">
         <?php if ($topResult): ?>

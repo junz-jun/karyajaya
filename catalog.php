@@ -5,21 +5,7 @@ include 'includes/header.php';
 ?>
 
 <div class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="px-6 md:px-10 py-3 flex items-center justify-between mx-auto max-w-7xl">
-            <div class="flex items-center gap-4 text-slate-900 dark:text-white">
-                <div class="size-6 text-primary">
-                    <span class="material-symbols-outlined text-2xl">eco</span>
-                </div>
-                <h2 class="text-lg font-bold leading-tight tracking-tight">Katalog Penyakit</h2>
-            </div>
-            <nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
-                <a class="text-sm font-medium hover:text-primary transition-colors text-slate-600 dark:text-slate-300" href="index.php">Beranda</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors text-slate-600 dark:text-slate-300" href="diagnosis.php">Diagnosa</a>
-                <a class="text-sm font-medium text-primary" href="catalog.php">Katalog</a>
-            </nav>
-        </div>
-    </header>
+    <?php include 'includes/navbar.php'; ?>
     <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-8">
         <div class="flex flex-col gap-6 mb-10">
             <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">Daftar Penyakit & Hama</h1>

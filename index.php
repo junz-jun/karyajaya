@@ -1,25 +1,7 @@
 <?php include 'includes/header.php'; ?>
 
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-text-light font-display antialiased">
-    <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark/80 backdrop-blur-md px-6 py-4 lg:px-10">
-        <div class="flex items-center gap-3 text-white">
-            <div class="flex size-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                <span class="material-symbols-outlined text-[24px]">local_florist</span>
-            </div>
-            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Karya Jaya</h2>
-        </div>
-        <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
-            <nav class="flex items-center gap-8">
-                <a class="text-text-light hover:text-primary transition-colors text-sm font-medium leading-normal" href="index.php">Beranda</a>
-                <a class="text-text-light hover:text-primary transition-colors text-sm font-medium leading-normal" href="about.php">Tentang Kami</a>
-                <a class="text-text-light hover:text-primary transition-colors text-sm font-medium leading-normal" href="catalog.php">Katalog</a>
-                <a class="text-text-light hover:text-primary transition-colors text-sm font-medium leading-normal" href="education.php">Edukasi</a>
-            </nav>
-            <a href="diagnosis.php" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-primary/90 transition-all text-[#111813] text-sm font-bold leading-normal tracking-[0.015em] shadow-[0_0_15px_rgba(23,207,84,0.3)]">
-                <span class="truncate">Mulai Diagnosa</span>
-            </a>
-        </div>
-    </header>
+    <?php include 'includes/navbar.php'; ?>
     <main class="flex-grow">
         <section class="relative overflow-hidden pt-10 pb-20 lg:pt-20 lg:pb-32 px-4">
             <div class="absolute top-0 right-0 -z-10 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[120px]"></div>

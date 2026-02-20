@@ -1,21 +1,7 @@
 <?php include 'includes/header.php'; ?>
 
 <div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col overflow-x-hidden">
-     <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#29382e] bg-background-light/80 dark:bg-[#111813]/90 backdrop-blur-md">
-        <div class="px-4 md:px-10 py-3 max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-3 text-primary">
-                <div class="size-6">
-                    <span class="material-symbols-outlined text-3xl">eco</span>
-                </div>
-                <h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Karya Jaya</h2>
-            </div>
-            <nav class="hidden md:flex items-center gap-8">
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="index.php">Beranda</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="diagnosis.php">Diagnosa</a>
-                <a class="text-primary font-bold text-sm leading-normal" href="about.php">Tentang & Kontak</a>
-            </nav>
-        </div>
-    </header>
+    <?php include 'includes/navbar.php'; ?>
     <main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-10 py-8 flex flex-col gap-16">
         <section class="relative rounded-2xl overflow-hidden min-h-[400px] flex items-center justify-center bg-surface-dark border border-border-dark">
             <div class="relative z-20 max-w-3xl text-center px-6 flex flex-col items-center gap-6">
