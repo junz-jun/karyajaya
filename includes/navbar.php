@@ -17,9 +17,12 @@
                 <a class="<?php echo $current_page == 'education.php' ? 'text-primary' : 'text-text-light hover:text-primary'; ?> transition-colors text-sm font-medium" href="education.php">Edukasi</a>
                 <a class="<?php echo $current_page == 'history.php' ? 'text-primary' : 'text-text-light hover:text-primary'; ?> transition-colors text-sm font-medium" href="history.php">Riwayat</a>
             </nav>
-            <a href="diagnosis.php" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-primary/90 transition-all text-[#111813] text-sm font-bold shadow-[0_0_15px_rgba(23,207_84,0.3)]">
-                Mulai Diagnosa
-            </a>
+            <div class="flex items-center gap-4">
+                <a href="admin/index.php" class="text-text-light hover:text-primary transition-colors text-sm font-medium">Login Admin</a>
+                <a href="diagnosis.php" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-primary/90 transition-all text-[#111813] text-sm font-bold shadow-[0_0_15px_rgba(23,207_84,0.3)]">
+                    Mulai Diagnosa
+                </a>
+            </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -36,6 +39,7 @@
             <a class="<?php echo $current_page == 'catalog.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="catalog.php">Katalog</a>
             <a class="<?php echo $current_page == 'education.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="education.php">Edukasi</a>
             <a class="<?php echo $current_page == 'history.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="history.php">Riwayat</a>
+            <a class="text-text-light py-2 text-base font-medium" href="admin/index.php">Login Admin</a>
             <a href="diagnosis.php" class="mt-2 flex items-center justify-center rounded-lg h-12 bg-primary text-[#111813] font-bold shadow-lg">
                 Mulai Diagnosa
             </a>

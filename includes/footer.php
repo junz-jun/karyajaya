@@ -1,6 +1,6 @@
     <footer class="bg-surface-dark border-t border-border-dark pt-16 pb-8 px-4 w-full">
         <div class="container mx-auto max-w-7xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center gap-3 text-white mb-2">
                         <div class="flex size-8 items-center justify-center rounded-md bg-primary/20 text-primary">
@@ -32,12 +32,6 @@
                             <span class="material-symbols-outlined text-primary text-base">call</span>
                             <span>+62 812 3456 7890</span>
                         </li>
-                    </ul>
-                </div>
-                    <div>
-                    <h4 class="text-white font-bold mb-4">Admin</h4>
-                        <ul class="flex flex-col gap-3 text-text-muted text-sm">
-                        <li><a class="hover:text-primary transition-colors" href="admin/index.php">Login Admin</a></li>
                     </ul>
                 </div>
             </div>
