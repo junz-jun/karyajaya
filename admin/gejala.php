@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $conn->real_escape_string($_POST['name']);
             $category = $conn->real_escape_string($_POST['category']);
 
-            $sql = "INSERT INTO symptoms (code, name, category) VALUES ('$code', '$name', '$category')";
+            $sql = "INSERT INTO gejala (kode, nama, kategori) VALUES ('$code', '$name', '$category')";
             if ($conn->query($sql)) {
-                echo "<script>alert('Gejala berhasil ditambahkan!'); window.location='symptoms.php';</script>";
+                echo "<script>alert('Gejala berhasil ditambahkan!'); window.location='gejala.php';</script>";
             } else {
                 echo "<script>alert('Gagal menambahkan gejala: " . addslashes($conn->error) . "');</script>";
             }
@@ -20,15 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $conn->real_escape_string($_POST['name']);
             $category = $conn->real_escape_string($_POST['category']);
 
-            $sql = "UPDATE symptoms SET code='$code', name='$name', category='$category' WHERE id=$id";
+            $sql = "UPDATE gejala SET kode='$code', nama='$name', kategori='$category' WHERE id=$id";
             if ($conn->query($sql)) {
-                echo "<script>alert('Gejala berhasil diperbarui!'); window.location='symptoms.php';</script>";
+                echo "<script>alert('Gejala berhasil diperbarui!'); window.location='gejala.php';</script>";
             }
         } elseif ($_POST['action'] == 'delete') {
             $id = (int)$_POST['id'];
-            $sql = "DELETE FROM symptoms WHERE id=$id";
+            $sql = "DELETE FROM gejala WHERE id=$id";
             if ($conn->query($sql)) {
-                echo "<script>alert('Gejala berhasil dihapus!'); window.location='symptoms.php';</script>";
+                echo "<script>alert('Gejala berhasil dihapus!'); window.location='gejala.php';</script>";
             }
         }
     }
@@ -54,17 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </thead>
                 <tbody class="divide-y divide-[#29382e] text-sm text-white">
                     <?php
-                    $symptoms = $conn->query("SELECT * FROM symptoms ORDER BY code ASC");
+                    $symptoms = $conn->query("SELECT * FROM gejala ORDER BY kode ASC");
                     while ($s = $symptoms->fetch_assoc()):
                     ?>
                     <tr class="hover:bg-white/5 transition-colors">
-                        <td class="px-6 py-4 font-mono text-primary font-medium"><?php echo $s['code']; ?></td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-border-dark text-xs"><?php echo $s['category']; ?></span></td>
-                        <td class="px-6 py-4"><?php echo htmlspecialchars($s['name']); ?></td>
+                        <td class="px-6 py-4 font-mono text-primary font-medium"><?php echo $s['kode']; ?></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-border-dark text-xs"><?php echo $s['kategori']; ?></span></td>
+                        <td class="px-6 py-4"><?php echo htmlspecialchars($s['nama']); ?></td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick='openEditModal(<?php echo json_encode($s); ?>)' class="text-blue-400 hover:text-blue-300"><span class="material-symbols-outlined text-lg">edit</span></button>
-                                <button onclick="deleteSymptom(<?php echo $s['id']; ?>, '<?php echo addslashes($s['name']); ?>')" class="text-red-400 hover:text-red-300"><span class="material-symbols-outlined text-lg">delete</span></button>
+                                <button onclick="deleteSymptom(<?php echo $s['id']; ?>, '<?php echo addslashes($s['nama']); ?>')" class="text-red-400 hover:text-red-300"><span class="material-symbols-outlined text-lg">delete</span></button>
                             </div>
                         </td>
                     </tr>
@@ -89,15 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="grid grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="text-sm font-medium text-[#9db8a6]">Kode Gejala</label>
-                    <input type="text" name="code" id="symptomCode" required placeholder="G001" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                    <input type="text" name="code" id="symptomCode" required placeholder="G01" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
                 </div>
                 <div class="space-y-2">
-                    <label class="text-sm font-medium text-[#9db8a6]">Kategori</label>
+                    <label class="text-sm font-medium text-[#9db8a6]">Kategori (Penyakit)</label>
                     <select name="category" id="symptomCategory" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
-                        <option value="Daun">Daun</option>
-                        <option value="Batang">Batang</option>
-                        <option value="Buah">Buah</option>
-                        <option value="Akar">Akar</option>
+                        <?php
+                        $penyakitList = $conn->query("SELECT kode, nama FROM penyakit ORDER BY kode ASC");
+                        while ($p = $penyakitList->fetch_assoc()):
+                        ?>
+                        <option value="<?php echo $p['kode']; ?>"><?php echo $p['kode'] . ' - ' . $p['nama']; ?></option>
+                        <?php endwhile; ?>
                     </select>
                 </div>
             </div>
@@ -128,7 +130,6 @@ function openAddModal() {
     document.getElementById('symptomId').value = '';
     document.getElementById('symptomCode').value = '';
     document.getElementById('symptomName').value = '';
-    document.getElementById('symptomCategory').value = 'Daun';
     document.getElementById('symptomModal').classList.remove('hidden');
 }
 
@@ -136,9 +137,9 @@ function openEditModal(symptom) {
     document.getElementById('modalTitle').innerText = 'Edit Gejala';
     document.getElementById('formAction').value = 'edit';
     document.getElementById('symptomId').value = symptom.id;
-    document.getElementById('symptomCode').value = symptom.code;
-    document.getElementById('symptomName').value = symptom.name;
-    document.getElementById('symptomCategory').value = symptom.category;
+    document.getElementById('symptomCode').value = symptom.kode;
+    document.getElementById('symptomName').value = symptom.nama;
+    document.getElementById('symptomCategory').value = symptom.kategori;
     document.getElementById('symptomModal').classList.remove('hidden');
 }
 

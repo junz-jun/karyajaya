@@ -8,18 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // In database.sql, password is 'admin123' hashed.
-    // admin | $2y$10$8Wk/D3qjP1GgXzYxY/pYf.6i1pW7uHlK6qW9z1v1v1v1v1v1v1v1v (this hash was a placeholder, let's fix it)
-
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT * FROM pengguna WHERE nama_pengguna = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
-    if ($user && password_verify($password, $user['password'])) {
+    if ($user && password_verify($password, $user['kata_sandi'])) {
         $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user'] = $user['username'];
+        $_SESSION['admin_user'] = $user['nama_pengguna'];
         header("Location: index.php");
         exit;
     } else {

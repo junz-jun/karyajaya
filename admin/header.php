@@ -54,15 +54,15 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="text-sm font-medium">Dashboard</span>
             </a>
-            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'diseases.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="diseases.php">
+            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'penyakit.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="penyakit.php">
                 <span class="material-symbols-outlined">medical_services</span>
                 <span class="text-sm font-medium">Penyakit</span>
             </a>
-            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'symptoms.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="symptoms.php">
+            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'gejala.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="gejala.php">
                 <span class="material-symbols-outlined">thermometer</span>
                 <span class="text-sm font-medium">Gejala</span>
             </a>
-            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'rules.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="rules.php">
+            <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <?php echo $current_page == 'aturan.php' ? 'bg-primary/20 text-primary border border-primary/10' : 'text-slate-400 hover:bg-surface-highlight hover:text-white'; ?> transition-colors" href="aturan.php">
                 <span class="material-symbols-outlined">rule</span>
                 <span class="text-sm font-medium">Basis Pengetahuan</span>
             </a>

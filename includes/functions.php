@@ -5,11 +5,11 @@ include_once __DIR__ . '/../config/database.php';
  * Get all symptoms grouped by category
  */
 function getSymptomsByCategory($conn) {
-    $sql = "SELECT * FROM symptoms ORDER BY category, code";
+    $sql = "SELECT * FROM gejala ORDER BY kategori, kode";
     $result = $conn->query($sql);
     $symptoms = [];
     while ($row = $result->fetch_assoc()) {
-        $symptoms[$row['category']][] = $row;
+        $symptoms[$row['kategori']][] = $row;
     }
     return $symptoms;
 }
@@ -18,7 +18,7 @@ function getSymptomsByCategory($conn) {
  * Get all diseases
  */
 function getDiseases($conn) {
-    $sql = "SELECT * FROM diseases";
+    $sql = "SELECT * FROM penyakit";
     $result = $conn->query($sql);
     $diseases = [];
     while ($row = $result->fetch_assoc()) {
@@ -39,18 +39,18 @@ function calculateDiagnosis($conn, $selectedSymptoms) {
     $symptomIds = implode(',', $safeIds);
 
     // Get rules for selected symptoms
-    $sql = "SELECT r.*, d.name as disease_name, d.description, d.solution, d.prevention
-            FROM rules r
-            JOIN diseases d ON r.disease_id = d.id
-            WHERE r.symptom_id IN ($symptomIds)";
+    $sql = "SELECT r.*, d.nama as nama_penyakit, d.deskripsi, d.solusi, d.pencegahan
+            FROM aturan r
+            JOIN penyakit d ON r.id_penyakit = d.id
+            WHERE r.id_gejala IN ($symptomIds)";
     $result = $conn->query($sql);
 
     $diseaseResults = [];
 
     while ($row = $result->fetch_assoc()) {
-        $diseaseId = $row['disease_id'];
-        $symptomId = $row['symptom_id'];
-        $cfExpert = $row['cf_expert'];
+        $diseaseId = $row['id_penyakit'];
+        $symptomId = $row['id_gejala'];
+        $cfExpert = $row['cf_pakar'];
         $cfUser = $selectedSymptoms[$symptomId];
 
         $cfSymptom = $cfExpert * $cfUser;
@@ -58,10 +58,10 @@ function calculateDiagnosis($conn, $selectedSymptoms) {
         if (!isset($diseaseResults[$diseaseId])) {
             $diseaseResults[$diseaseId] = [
                 'id' => $diseaseId,
-                'name' => $row['disease_name'],
-                'description' => $row['description'],
-                'solution' => $row['solution'],
-                'prevention' => $row['prevention'],
+                'name' => $row['nama_penyakit'],
+                'description' => $row['deskripsi'],
+                'solution' => $row['solusi'],
+                'prevention' => $row['pencegahan'],
                 'cf' => 0
             ];
             $diseaseResults[$diseaseId]['cf'] = $cfSymptom;
@@ -83,7 +83,7 @@ function calculateDiagnosis($conn, $selectedSymptoms) {
  * Save diagnosis to history
  */
 function saveHistory($conn, $userName, $diseaseName, $cfPercentage, $details) {
-    $stmt = $conn->prepare("INSERT INTO history (user_name, disease_name, cf_percentage, details) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO riwayat (nama_pengguna, nama_penyakit, persentase_cf, detail) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssds", $userName, $diseaseName, $cfPercentage, $details);
     return $stmt->execute();
 }
@@ -92,7 +92,7 @@ function saveHistory($conn, $userName, $diseaseName, $cfPercentage, $details) {
  * Get history
  */
 function getHistory($conn, $limit = 10) {
-    $sql = "SELECT * FROM history ORDER BY created_at DESC LIMIT $limit";
+    $sql = "SELECT * FROM riwayat ORDER BY dibuat_pada DESC LIMIT $limit";
     $result = $conn->query($sql);
     $history = [];
     while ($row = $result->fetch_assoc()) {

@@ -16,9 +16,9 @@
                     <h4 class="text-white font-bold mb-4">Menu Cepat</h4>
                     <ul class="flex flex-col gap-3 text-text-muted text-sm">
                         <li><a class="hover:text-primary transition-colors" href="index.php">Beranda</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="about.php">Tentang Kami</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="diagnosis.php">Diagnosa</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="catalog.php">Katalog</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="tentang.php">Tentang Kami</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="diagnosa.php">Diagnosa</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="katalog.php">Katalog</a></li>
                     </ul>
                 </div>
                 <div>
