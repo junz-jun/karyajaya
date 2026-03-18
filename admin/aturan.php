@@ -4,37 +4,37 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] == 'add') {
-            $disease_id = (int)$_POST['disease_id'];
-            $symptom_id = (int)$_POST['symptom_id'];
-            $cf_expert = (float)$_POST['cf_expert'];
+            $id_penyakit = (int)$_POST['id_penyakit'];
+            $id_gejala = (int)$_POST['id_gejala'];
+            $cf_pakar = (float)$_POST['cf_pakar'];
 
             // Check if rule already exists
-            $check = $conn->query("SELECT id FROM rules WHERE disease_id=$disease_id AND symptom_id=$symptom_id");
+            $check = $conn->query("SELECT id FROM aturan WHERE id_penyakit=$id_penyakit AND id_gejala=$id_gejala");
             if ($check->num_rows > 0) {
-                echo "<script>alert('Aturan ini sudah ada!'); window.location='rules.php';</script>";
+                echo "<script>alert('Aturan ini sudah ada!'); window.location='aturan.php';</script>";
             } else {
-                $sql = "INSERT INTO rules (disease_id, symptom_id, cf_expert) VALUES ($disease_id, $symptom_id, $cf_expert)";
+                $sql = "INSERT INTO aturan (id_penyakit, id_gejala, cf_pakar) VALUES ($id_penyakit, $id_gejala, $cf_pakar)";
                 if ($conn->query($sql)) {
-                    echo "<script>alert('Aturan berhasil ditambahkan!'); window.location='rules.php';</script>";
+                    echo "<script>alert('Aturan berhasil ditambahkan!'); window.location='aturan.php';</script>";
                 } else {
                     echo "<script>alert('Gagal menambahkan aturan: " . addslashes($conn->error) . "');</script>";
                 }
             }
         } elseif ($_POST['action'] == 'edit') {
             $id = (int)$_POST['id'];
-            $disease_id = (int)$_POST['disease_id'];
-            $symptom_id = (int)$_POST['symptom_id'];
-            $cf_expert = (float)$_POST['cf_expert'];
+            $id_penyakit = (int)$_POST['id_penyakit'];
+            $id_gejala = (int)$_POST['id_gejala'];
+            $cf_pakar = (float)$_POST['cf_pakar'];
 
-            $sql = "UPDATE rules SET disease_id=$disease_id, symptom_id=$symptom_id, cf_expert=$cf_expert WHERE id=$id";
+            $sql = "UPDATE aturan SET id_penyakit=$id_penyakit, id_gejala=$id_gejala, cf_pakar=$cf_pakar WHERE id=$id";
             if ($conn->query($sql)) {
-                echo "<script>alert('Aturan berhasil diperbarui!'); window.location='rules.php';</script>";
+                echo "<script>alert('Aturan berhasil diperbarui!'); window.location='aturan.php';</script>";
             }
         } elseif ($_POST['action'] == 'delete') {
             $id = (int)$_POST['id'];
-            $sql = "DELETE FROM rules WHERE id=$id";
+            $sql = "DELETE FROM aturan WHERE id=$id";
             if ($conn->query($sql)) {
-                echo "<script>alert('Aturan berhasil dihapus!'); window.location='rules.php';</script>";
+                echo "<script>alert('Aturan berhasil dihapus!'); window.location='aturan.php';</script>";
             }
         }
     }
@@ -54,30 +54,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tr class="bg-[#233329] text-[#9db8a6] text-xs uppercase tracking-wider font-semibold">
                         <th class="px-6 py-4">Penyakit</th>
                         <th class="px-6 py-4">Gejala</th>
-                        <th class="px-6 py-4 w-32 text-center">Bobot Expert (CF)</th>
+                        <th class="px-6 py-4 w-32 text-center">Bobot Pakar (CF)</th>
                         <th class="px-6 py-4 w-32 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-[#29382e] text-sm text-white">
                     <?php
-                    $rules = $conn->query("SELECT r.*, d.name as disease_name, s.name as symptom_name, s.code as symptom_code
-                                         FROM rules r
-                                         JOIN diseases d ON r.disease_id = d.id
-                                         JOIN symptoms s ON r.symptom_id = s.id
-                                         ORDER BY d.name, s.code ASC");
+                    $rules = $conn->query("SELECT r.*, d.nama as nama_penyakit, s.nama as nama_gejala, s.kode as kode_gejala
+                                         FROM aturan r
+                                         JOIN penyakit d ON r.id_penyakit = d.id
+                                         JOIN gejala s ON r.id_gejala = s.id
+                                         ORDER BY d.nama, s.kode ASC");
                     while ($r = $rules->fetch_assoc()):
                     ?>
                     <tr class="hover:bg-white/5 transition-colors">
-                        <td class="px-6 py-4 text-slate-300"><?php echo $r['disease_name']; ?></td>
+                        <td class="px-6 py-4 text-slate-300"><?php echo $r['nama_penyakit']; ?></td>
                         <td class="px-6 py-4 text-slate-400">
-                            <span class="text-primary font-mono text-xs mr-2"><?php echo $r['symptom_code']; ?></span>
-                            <?php echo htmlspecialchars($r['symptom_name']); ?>
+                            <span class="text-primary font-mono text-xs mr-2"><?php echo $r['kode_gejala']; ?></span>
+                            <?php echo htmlspecialchars($r['nama_gejala']); ?>
                         </td>
-                        <td class="px-6 py-4 text-center font-bold text-white"><?php echo $r['cf_expert']; ?></td>
+                        <td class="px-6 py-4 text-center font-bold text-white"><?php echo $r['cf_pakar']; ?></td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick='openEditModal(<?php echo json_encode($r); ?>)' class="text-blue-400 hover:text-blue-300"><span class="material-symbols-outlined text-lg">edit</span></button>
-                                <button onclick="deleteRule(<?php echo $r['id']; ?>, '<?php echo addslashes($r['disease_name']); ?>', '<?php echo addslashes($r['symptom_name']); ?>')" class="text-red-400 hover:text-red-300"><span class="material-symbols-outlined text-lg">delete</span></button>
+                                <button onclick="deleteRule(<?php echo $r['id']; ?>, '<?php echo addslashes($r['nama_penyakit']); ?>', '<?php echo addslashes($r['nama_gejala']); ?>')" class="text-red-400 hover:text-red-300"><span class="material-symbols-outlined text-lg">delete</span></button>
                             </div>
                         </td>
                     </tr>
@@ -101,33 +101,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="space-y-2">
                 <label class="text-sm font-medium text-[#9db8a6]">Penyakit</label>
-                <select name="disease_id" id="ruleDisease" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <select name="id_penyakit" id="ruleDisease" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
                     <option value="">Pilih Penyakit</option>
                     <?php
-                    $diseases = $conn->query("SELECT id, name FROM diseases ORDER BY name ASC");
+                    $diseases = $conn->query("SELECT id, nama, kode FROM penyakit ORDER BY kode ASC");
                     while ($d = $diseases->fetch_assoc()):
                     ?>
-                    <option value="<?php echo $d['id']; ?>"><?php echo $d['name']; ?></option>
+                    <option value="<?php echo $d['id']; ?>"><?php echo $d['kode'] . ' - ' . $d['nama']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
 
             <div class="space-y-2">
                 <label class="text-sm font-medium text-[#9db8a6]">Gejala</label>
-                <select name="symptom_id" id="ruleSymptom" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <select name="id_gejala" id="ruleSymptom" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
                     <option value="">Pilih Gejala</option>
                     <?php
-                    $symptoms = $conn->query("SELECT id, name, code FROM symptoms ORDER BY code ASC");
+                    $symptoms = $conn->query("SELECT id, nama, kode FROM gejala ORDER BY kode ASC");
                     while ($s = $symptoms->fetch_assoc()):
                     ?>
-                    <option value="<?php echo $s['id']; ?>"><?php echo $s['code'] . ' - ' . $s['name']; ?></option>
+                    <option value="<?php echo $s['id']; ?>"><?php echo $s['kode'] . ' - ' . $s['nama']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
 
             <div class="space-y-2">
-                <label class="text-sm font-medium text-[#9db8a6]">Bobot Expert (Certainty Factor: 0 s/d 1.0)</label>
-                <input type="number" step="0.1" min="0" max="1" name="cf_expert" id="ruleCf" required placeholder="Contoh: 0.8" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <label class="text-sm font-medium text-[#9db8a6]">Bobot Pakar (Certainty Factor: 0 s/d 1.0)</label>
+                <input type="number" step="0.1" min="0" max="1" name="cf_pakar" id="ruleCf" required placeholder="Contoh: 0.8" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
             </div>
 
             <div class="flex gap-4 pt-4">
@@ -159,9 +159,9 @@ function openEditModal(rule) {
     document.getElementById('modalTitle').innerText = 'Edit Hubungan Gejala';
     document.getElementById('formAction').value = 'edit';
     document.getElementById('ruleId').value = rule.id;
-    document.getElementById('ruleDisease').value = rule.disease_id;
-    document.getElementById('ruleSymptom').value = rule.symptom_id;
-    document.getElementById('ruleCf').value = rule.cf_expert;
+    document.getElementById('ruleDisease').value = rule.id_penyakit;
+    document.getElementById('ruleSymptom').value = rule.id_gejala;
+    document.getElementById('ruleCf').value = rule.cf_pakar;
     document.getElementById('ruleModal').classList.remove('hidden');
 }
 

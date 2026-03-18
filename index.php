@@ -20,11 +20,11 @@
                             Sistem pakar diagnosa penyakit kakao tercanggih menggunakan metode <span class="text-white font-medium">Certainty Factor</span>. Dapatkan hasil analisa akurat dan solusi penanganan terpercaya dalam hitungan detik.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-4">
-                            <a href="diagnosis.php" class="h-12 px-8 rounded-lg bg-primary hover:bg-primary/90 text-[#111813] font-bold text-base transition-all shadow-[0_0_20px_rgba(23,207,84,0.4)] flex items-center justify-center gap-2">
+                            <a href="diagnosa.php" class="h-12 px-8 rounded-lg bg-primary hover:bg-primary/90 text-[#111813] font-bold text-base transition-all shadow-[0_0_20px_rgba(23,207_84,0.4)] flex items-center justify-center gap-2">
                                 <span class="material-symbols-outlined">stethoscope</span>
                                 <span>Mulai Diagnosa</span>
                             </a>
-                            <a href="about.php" class="h-12 px-8 rounded-lg border border-border-dark hover:border-primary/50 bg-surface-dark hover:bg-surface-dark/80 text-white font-medium text-base transition-all flex items-center justify-center gap-2">
+                            <a href="tentang.php" class="h-12 px-8 rounded-lg border border-border-dark hover:border-primary/50 bg-surface-dark hover:bg-surface-dark/80 text-white font-medium text-base transition-all flex items-center justify-center gap-2">
                                 <span>Pelajari Metode</span>
                                 <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>

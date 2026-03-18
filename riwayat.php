@@ -24,19 +24,19 @@ include 'includes/header.php';
                     <span class="material-symbols-outlined">home</span>
                     <span class="text-sm font-medium">Beranda</span>
                 </a>
-                <a href="diagnosis.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                <a href="diagnosa.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
                     <span class="material-symbols-outlined">stethoscope</span>
                     <span class="text-sm font-medium">Diagnosa</span>
                 </a>
-                <a href="history.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors">
+                <a href="riwayat.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors">
                     <span class="material-symbols-outlined fill-1">history</span>
                     <span class="text-sm font-medium">Riwayat</span>
                 </a>
-                <a href="catalog.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                <a href="katalog.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
                     <span class="material-symbols-outlined">pest_control</span>
                     <span class="text-sm font-medium">Penyakit</span>
                 </a>
-                <a href="about.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                <a href="tentang.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
                     <span class="material-symbols-outlined">info</span>
                     <span class="text-sm font-medium">Tentang</span>
                 </a>
@@ -65,7 +65,7 @@ include 'includes/header.php';
                         <h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Riwayat Diagnosa</h1>
                         <p class="text-slate-400 text-base">Daftar lengkap hasil diagnosa penyakit tanaman kakao Anda.</p>
                     </div>
-                    <a href="diagnosis.php" class="w-fit flex items-center gap-2 bg-primary hover:bg-green-600 text-[#111813] px-5 py-3 rounded-lg font-bold shadow-lg shadow-green-500/20 transition-all transform hover:scale-[1.02]">
+                    <a href="diagnosa.php" class="w-fit flex items-center gap-2 bg-primary hover:bg-green-600 text-[#111813] px-5 py-3 rounded-lg font-bold shadow-lg shadow-green-500/20 transition-all transform hover:scale-[1.02]">
                         <span class="material-symbols-outlined">add_circle</span>
                         <span>Diagnosa Baru</span>
                     </a>
@@ -93,14 +93,14 @@ include 'includes/header.php';
                                     <?php $no = 1; foreach ($history as $h): ?>
                                     <tr class="group hover:bg-white/5 transition-colors">
                                         <td class="p-4 text-center text-slate-500 font-medium"><?php echo $no++; ?></td>
-                                        <td class="p-4 text-white font-medium"><?php echo date('d M Y, H:i', strtotime($h['created_at'])); ?></td>
-                                        <td class="p-4 text-slate-400"><?php echo htmlspecialchars($h['user_name']); ?></td>
-                                        <td class="p-4"><div class="font-semibold text-white"><?php echo $h['disease_name']; ?></div></td>
-                                        <td class="p-4"><span class="font-bold text-white"><?php echo number_format($h['cf_percentage'], 1); ?>%</span></td>
+                                        <td class="p-4 text-white font-medium"><?php echo date('d M Y, H:i', strtotime($h['dibuat_pada'])); ?></td>
+                                        <td class="p-4 text-slate-400"><?php echo htmlspecialchars($h['nama_pengguna']); ?></td>
+                                        <td class="p-4"><div class="font-semibold text-white"><?php echo $h['nama_penyakit']; ?></div></td>
+                                        <td class="p-4"><span class="font-bold text-white"><?php echo number_format($h['persentase_cf'], 1); ?>%</span></td>
                                         <td class="p-4">
-                                            <?php if ($h['cf_percentage'] >= 80): ?>
+                                            <?php if ($h['persentase_cf'] >= 80): ?>
                                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-900/30 text-green-400 border border-green-800">Tinggi</span>
-                                            <?php elseif ($h['cf_percentage'] >= 50): ?>
+                                            <?php elseif ($h['persentase_cf'] >= 50): ?>
                                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-900/30 text-amber-400 border border-amber-800">Sedang</span>
                                             <?php else: ?>
                                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-900/30 text-red-400 border border-red-800">Rendah</span>

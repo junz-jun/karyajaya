@@ -16,14 +16,14 @@ include 'includes/header.php';
             <div class="group relative flex flex-col bg-white dark:bg-surface-dark rounded-xl overflow-hidden border border-gray-200 dark:border-white/5 hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/10">
                 <div class="aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800 relative flex items-center justify-center">
                     <span class="material-symbols-outlined text-6xl text-primary/30">eco</span>
-                    <?php if ($d['image']): ?>
-                        <img src="assets/img/<?php echo $d['image']; ?>" alt="<?php echo $d['name']; ?>" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <?php if ($d['gambar']): ?>
+                        <img src="assets/img/<?php echo $d['gambar']; ?>" alt="<?php echo $d['nama']; ?>" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     <?php endif; ?>
                 </div>
                 <div class="flex flex-col flex-1 p-6">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors"><?php echo $d['name']; ?></h3>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors"><?php echo $d['nama']; ?></h3>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3 leading-relaxed flex-1">
-                        <?php echo $d['description']; ?>
+                        <?php echo $d['deskripsi']; ?>
                     </p>
                     <div class="pt-4 border-t border-border-dark mt-auto">
                         <button onclick='showDiseaseDetail(<?php echo htmlspecialchars(json_encode($d), ENT_QUOTES, 'UTF-8'); ?>)' class="text-primary text-sm font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">
@@ -86,17 +86,17 @@ include 'includes/header.php';
 
 <script>
 function showDiseaseDetail(data) {
-    document.getElementById('modalDiseaseName').textContent = data.name;
-    document.getElementById('modalDiseaseDescription').textContent = data.description;
-    document.getElementById('modalDiseaseSolution').textContent = data.solution || 'Informasi solusi tidak tersedia.';
-    document.getElementById('modalDiseasePrevention').textContent = data.prevention || 'Informasi pencegahan tidak tersedia.';
+    document.getElementById('modalDiseaseName').textContent = data.nama;
+    document.getElementById('modalDiseaseDescription').textContent = data.deskripsi;
+    document.getElementById('modalDiseaseSolution').textContent = data.solusi || 'Informasi solusi tidak tersedia.';
+    document.getElementById('modalDiseasePrevention').textContent = data.pencegahan || 'Informasi pencegahan tidak tersedia.';
 
     const imgContainer = document.getElementById('modalDiseaseImageContainer');
     const img = document.getElementById('modalDiseaseImage');
 
-    if (data.image) {
-        img.src = 'assets/img/' + data.image;
-        img.alt = data.name;
+    if (data.gambar) {
+        img.src = 'assets/img/' + data.gambar;
+        img.alt = data.nama;
         imgContainer.classList.remove('hidden');
     } else {
         imgContainer.classList.add('hidden');

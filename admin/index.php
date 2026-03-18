@@ -8,10 +8,10 @@
     <div class="max-w-7xl mx-auto flex flex-col gap-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <?php
-            $countDiseases = $conn->query("SELECT COUNT(*) as total FROM diseases")->fetch_assoc()['total'];
-            $countSymptoms = $conn->query("SELECT COUNT(*) as total FROM symptoms")->fetch_assoc()['total'];
-            $countRules = $conn->query("SELECT COUNT(*) as total FROM rules")->fetch_assoc()['total'];
-            $countHistory = $conn->query("SELECT COUNT(*) as total FROM history")->fetch_assoc()['total'];
+            $countDiseases = $conn->query("SELECT COUNT(*) as total FROM penyakit")->fetch_assoc()['total'];
+            $countSymptoms = $conn->query("SELECT COUNT(*) as total FROM gejala")->fetch_assoc()['total'];
+            $countRules = $conn->query("SELECT COUNT(*) as total FROM aturan")->fetch_assoc()['total'];
+            $countHistory = $conn->query("SELECT COUNT(*) as total FROM riwayat")->fetch_assoc()['total'];
             ?>
             <div class="flex flex-col p-6 rounded-xl bg-surface-dark border border-[#29382e]">
                 <p class="text-[#9db8a6] text-sm font-medium mb-1">Penyakit</p>
@@ -45,13 +45,13 @@
                         </thead>
                         <tbody class="divide-y divide-border-dark">
                             <?php
-                            $recentHistory = $conn->query("SELECT * FROM history ORDER BY created_at DESC LIMIT 5");
+                            $recentHistory = $conn->query("SELECT * FROM riwayat ORDER BY dibuat_pada DESC LIMIT 5");
                             while ($h = $recentHistory->fetch_assoc()):
                             ?>
                             <tr>
-                                <td class="py-3"><?php echo date('d/m/y', strtotime($h['created_at'])); ?></td>
-                                <td class="py-3"><?php echo htmlspecialchars($h['user_name']); ?></td>
-                                <td class="py-3 text-primary"><?php echo $h['disease_name']; ?></td>
+                                <td class="py-3"><?php echo date('d/m/y', strtotime($h['dibuat_pada'])); ?></td>
+                                <td class="py-3"><?php echo htmlspecialchars($h['nama_pengguna']); ?></td>
+                                <td class="py-3 text-primary"><?php echo $h['nama_penyakit']; ?></td>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>
@@ -63,13 +63,13 @@
                 <h3 class="text-white font-bold mb-4">Statistik Penyakit</h3>
                 <div class="space-y-4">
                     <?php
-                    $stats = $conn->query("SELECT disease_name, COUNT(*) as count FROM history GROUP BY disease_name ORDER BY count DESC LIMIT 4");
+                    $stats = $conn->query("SELECT nama_penyakit, COUNT(*) as count FROM riwayat GROUP BY nama_penyakit ORDER BY count DESC LIMIT 4");
                     while ($s = $stats->fetch_assoc()):
                         $percentage = ($countHistory > 0) ? ($s['count'] / $countHistory) * 100 : 0;
                     ?>
                     <div>
                         <div class="flex justify-between text-xs mb-1">
-                            <span class="text-slate-300"><?php echo $s['disease_name']; ?></span>
+                            <span class="text-slate-300"><?php echo $s['nama_penyakit']; ?></span>
                             <span class="text-primary"><?php echo $s['count']; ?> kali</span>
                         </div>
                         <div class="w-full bg-border-dark rounded-full h-1.5">

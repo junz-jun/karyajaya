@@ -2,7 +2,7 @@
 include 'includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['symptoms'])) {
-    header('Location: diagnosis.php');
+    header('Location: diagnosa.php');
     exit;
 }
 
@@ -51,7 +51,7 @@ include 'includes/header.php';
                                 <div class="relative size-32 flex items-center justify-center">
                                     <svg class="size-full -rotate-90 transform" viewBox="0 0 36 36">
                                         <path class="text-[#29382e]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
-                                        <path class="text-primary drop-shadow-[0_0_10px_rgba(23,207,84,0.4)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="<?php echo $topResult['cf'] * 100; ?>, 100" stroke-linecap="round" stroke-width="3"></path>
+                                        <path class="text-primary drop-shadow-[0_0_10px_rgba(23,207_84,0.4)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="<?php echo $topResult['cf'] * 100; ?>, 100" stroke-linecap="round" stroke-width="3"></path>
                                     </svg>
                                     <div class="absolute flex flex-col items-center">
                                         <span class="text-3xl font-bold text-slate-900 dark:text-white"><?php echo number_format($topResult['cf'] * 100, 1); ?><span class="text-lg">%</span></span>
@@ -118,11 +118,11 @@ include 'includes/header.php';
                 <div class="bg-white dark:bg-[#1a2e23] rounded-xl border border-[#29382e] p-6 sticky top-24">
                     <h3 class="text-sm uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider mb-4">Tindakan</h3>
                     <div class="flex flex-col gap-3">
-                        <a href="diagnosis.php" class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-[#14b047] text-slate-900 font-bold py-3 px-4 rounded-lg transition-all shadow-[0_0_15px_rgba(23,207,84,0.2)]">
+                        <a href="diagnosa.php" class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-[#14b047] text-slate-900 font-bold py-3 px-4 rounded-lg transition-all shadow-[0_0_15px_rgba(23,207_84,0.2)]">
                             <span class="material-symbols-outlined">restart_alt</span>
                             Diagnosa Ulang
                         </a>
-                        <a href="catalog.php" class="w-full flex items-center justify-center gap-2 bg-transparent hover:bg-slate-100 dark:hover:bg-[#29382e] text-slate-600 dark:text-slate-400 font-medium py-3 px-4 rounded-lg transition-colors border border-border-dark">
+                        <a href="katalog.php" class="w-full flex items-center justify-center gap-2 bg-transparent hover:bg-slate-100 dark:hover:bg-[#29382e] text-slate-600 dark:text-slate-400 font-medium py-3 px-4 rounded-lg transition-colors border border-border-dark">
                             <span class="material-symbols-outlined">menu_book</span>
                             Lihat Katalog
                         </a>
@@ -139,7 +139,7 @@ include 'includes/header.php';
             <span class="material-symbols-outlined text-6xl text-slate-500 mb-4">sentiment_dissatisfied</span>
             <h2 class="text-2xl font-bold text-white mb-2">Maaf, Tidak Ada Hasil</h2>
             <p class="text-slate-400 mb-8">Sistem tidak menemukan penyakit yang cocok dengan gejala yang Anda pilih.</p>
-            <a href="diagnosis.php" class="bg-primary text-black font-bold py-3 px-8 rounded-lg">Coba Lagi</a>
+            <a href="diagnosa.php" class="bg-primary text-black font-bold py-3 px-8 rounded-lg">Coba Lagi</a>
         </div>
         <?php endif; ?>
     </main>
