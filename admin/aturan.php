@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="space-y-2">
                 <label class="text-sm font-medium text-[#9db8a6]">Bobot Pakar (Certainty Factor: 0 s/d 1.0)</label>
-                <input type="number" step="0.1" min="0" max="1" name="cf_pakar" id="ruleCf" required placeholder="Contoh: 0.8" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <input type="number" step="0.01" min="0" max="1" name="cf_pakar" id="ruleCf" required placeholder="Contoh: 0.74" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
             </div>
 
             <div class="flex gap-4 pt-4">
