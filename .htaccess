@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^login$ admin/login.php [L]
+RewriteRule ^login/?$ admin/login.php [R,L]
