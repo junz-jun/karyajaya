@@ -1,2 +1,3 @@
 RewriteEngine On
-RewriteRule ^login/?$ admin/login.php [R,L]
+# Jika mod_rewrite aktif, /login akan diarahkan ke login.php di root
+RewriteRule ^login/?$ login.php [R,L]
