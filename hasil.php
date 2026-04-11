@@ -1,18 +1,25 @@
 <?php
 include 'includes/functions.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['symptoms'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: diagnosa.php');
     exit;
 }
 
 $userName = $_POST['user_name'] ?? 'Petani Anonim';
-$selectedSymptomIds = $_POST['symptoms'];
-$cfUserValues = $_POST['cf_user'];
+$cfUserValues = $_POST['cf_user'] ?? [];
 
 $selectedSymptoms = [];
-foreach ($selectedSymptomIds as $id) {
-    $selectedSymptoms[$id] = floatval($cfUserValues[$id]);
+foreach ($cfUserValues as $id => $val) {
+    $val = floatval($val);
+    if ($val > 0) {
+        $selectedSymptoms[$id] = $val;
+    }
+}
+
+if (empty($selectedSymptoms)) {
+    header('Location: diagnosa.php');
+    exit;
 }
 
 $results = calculateDiagnosis($conn, $selectedSymptoms);

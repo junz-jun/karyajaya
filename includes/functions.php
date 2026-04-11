@@ -5,11 +5,15 @@ include_once __DIR__ . '/../config/database.php';
  * Get all symptoms grouped by category
  */
 function getSymptomsByCategory($conn) {
-    $sql = "SELECT * FROM gejala ORDER BY kategori, kode";
+    $sql = "SELECT g.*, p.nama as nama_penyakit
+            FROM gejala g
+            LEFT JOIN penyakit p ON g.kategori = p.kode
+            ORDER BY g.kategori, g.kode";
     $result = $conn->query($sql);
     $symptoms = [];
     while ($row = $result->fetch_assoc()) {
-        $symptoms[$row['kategori']][] = $row;
+        $categoryLabel = $row['kategori'] . ' ' . ($row['nama_penyakit'] ?? '');
+        $symptoms[trim($categoryLabel)][] = $row;
     }
     return $symptoms;
 }
@@ -91,8 +95,13 @@ function saveHistory($conn, $userName, $diseaseName, $cfPercentage, $details) {
 /**
  * Get history
  */
-function getHistory($conn, $limit = 10) {
-    $sql = "SELECT * FROM riwayat ORDER BY dibuat_pada DESC LIMIT $limit";
+function getHistory($conn, $limit = 10, $search = '') {
+    $sql = "SELECT * FROM riwayat";
+    if (!empty($search)) {
+        $search = $conn->real_escape_string($search);
+        $sql .= " WHERE nama_pengguna LIKE '%$search%' OR nama_penyakit LIKE '%$search%'";
+    }
+    $sql .= " ORDER BY dibuat_pada DESC LIMIT $limit";
     $result = $conn->query($sql);
     $history = [];
     while ($row = $result->fetch_assoc()) {
