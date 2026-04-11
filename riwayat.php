@@ -1,6 +1,7 @@
 <?php
 include 'includes/functions.php';
-$history = getHistory($conn, 20);
+$search = $_GET['search'] ?? '';
+$history = getHistory($conn, 50, $search);
 include 'includes/header.php';
 ?>
 
@@ -65,10 +66,23 @@ include 'includes/header.php';
                         <h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Riwayat Diagnosa</h1>
                         <p class="text-slate-400 text-base">Daftar lengkap hasil diagnosa penyakit tanaman kakao Anda.</p>
                     </div>
-                    <a href="diagnosa.php" class="w-fit flex items-center gap-2 bg-primary hover:bg-green-600 text-[#111813] px-5 py-3 rounded-lg font-bold shadow-lg shadow-green-500/20 transition-all transform hover:scale-[1.02]">
-                        <span class="material-symbols-outlined">add_circle</span>
-                        <span>Diagnosa Baru</span>
-                    </a>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <form action="" method="GET" class="relative group flex items-center">
+                            <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Cari nama atau penyakit..." class="bg-[#1a2e23] border border-border-dark text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-full md:w-64 pl-10 p-3 transition-all">
+                            <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">search</span>
+                            </button>
+                            <?php if($search): ?>
+                                <a href="riwayat.php" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
+                                    <span class="material-symbols-outlined text-sm">close</span>
+                                </a>
+                            <?php endif; ?>
+                        </form>
+                        <a href="diagnosa.php" class="w-fit flex items-center gap-2 bg-primary hover:bg-green-600 text-[#111813] px-5 py-3 rounded-lg font-bold shadow-lg shadow-green-500/20 transition-all transform hover:scale-[1.02]">
+                            <span class="material-symbols-outlined">add_circle</span>
+                            <span>Diagnosa Baru</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="bg-card-dark rounded-xl border border-border-dark shadow-xl overflow-hidden">

@@ -79,22 +79,22 @@ include 'includes/header.php';
                             <div class="p-6">
                                 <div class="flex items-center gap-3 mb-6">
                                     <span class="p-2 rounded-lg bg-primary/10 text-primary">
-                                        <span class="material-symbols-outlined">category</span>
+                                        <span class="material-symbols-outlined">pest_control</span>
                                     </span>
-                                    <h3 class="text-lg font-semibold text-white">Kategori: <?php echo $category; ?></h3>
+                                    <h3 class="text-lg font-semibold text-white">Penyakit: <?php echo $category; ?></h3>
                                 </div>
                                 <div class="space-y-4">
                                     <?php foreach ($symptoms as $s): ?>
                                     <div class="group flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-lg hover:bg-white/5 border border-transparent hover:border-border-dark transition-all">
-                                        <label class="flex items-start gap-4 cursor-pointer flex-1">
-                                            <input type="checkbox" name="symptoms[]" value="<?php echo $s['id']; ?>" class="mt-1 w-5 h-5 text-primary bg-slate-800 border-slate-600 rounded focus:ring-primary focus:ring-offset-gray-900">
+                                        <div class="flex items-start gap-4 flex-1">
                                             <div class="flex flex-col">
                                                 <span class="text-white font-medium text-base"><?php echo $s['nama']; ?></span>
                                                 <span class="text-slate-500 text-sm"><?php echo $s['kode']; ?></span>
                                             </div>
-                                        </label>
+                                        </div>
                                         <div class="w-full md:w-48">
                                             <select name="cf_user[<?php echo $s['id']; ?>]" class="w-full bg-[#112116] border border-border-dark text-white text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5">
+                                                <option value="0" selected>Pilih Tingkat Keyakinan</option>
                                                 <option value="1.0">Sangat Yakin (1.0)</option>
                                                 <option value="0.8">Yakin (0.8)</option>
                                                 <option value="0.6">Cukup Yakin (0.6)</option>

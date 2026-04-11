@@ -17,9 +17,6 @@
                 <a class="<?php echo $current_page == 'edukasi.php' ? 'text-primary' : 'text-text-light hover:text-primary'; ?> transition-colors text-sm font-medium" href="edukasi.php">Edukasi</a>
                 <a class="<?php echo $current_page == 'riwayat.php' ? 'text-primary' : 'text-text-light hover:text-primary'; ?> transition-colors text-sm font-medium" href="riwayat.php">Riwayat</a>
             </nav>
-            <div class="flex items-center gap-4">
-                <a href="admin/index.php" class="text-text-light hover:text-primary transition-colors text-sm font-medium">Login Admin</a>
-            </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -36,7 +33,6 @@
             <a class="<?php echo $current_page == 'katalog.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="katalog.php">Katalog</a>
             <a class="<?php echo $current_page == 'edukasi.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="edukasi.php">Edukasi</a>
             <a class="<?php echo $current_page == 'riwayat.php' ? 'text-primary' : 'text-text-light'; ?> py-2 text-base font-medium" href="riwayat.php">Riwayat</a>
-            <a class="text-text-light py-2 text-base font-medium" href="admin/index.php">Login Admin</a>
         </div>
     </div>
 </nav>
