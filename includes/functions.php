@@ -5,15 +5,12 @@ include_once __DIR__ . '/../config/database.php';
  * Get all symptoms grouped by category
  */
 function getSymptomsByCategory($conn) {
-    $sql = "SELECT g.*, p.nama as nama_penyakit
-            FROM gejala g
-            LEFT JOIN penyakit p ON g.kategori = p.kode
-            ORDER BY g.kategori, g.kode";
+    $sql = "SELECT * FROM gejala ORDER BY kategori, kode";
     $result = $conn->query($sql);
     $symptoms = [];
     while ($row = $result->fetch_assoc()) {
-        $categoryLabel = $row['kategori'] . ' ' . ($row['nama_penyakit'] ?? '');
-        $symptoms[trim($categoryLabel)][] = $row;
+        $categoryLabel = 'Penyakit ' . $row['kategori'];
+        $symptoms[$categoryLabel][] = $row;
     }
     return $symptoms;
 }
