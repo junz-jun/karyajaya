@@ -54,12 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </thead>
                 <tbody class="divide-y divide-[#29382e] text-sm text-white">
                     <?php
+                    $mapping = getCategoryMapping();
                     $symptoms = $conn->query("SELECT * FROM gejala ORDER BY kode ASC");
                     while ($s = $symptoms->fetch_assoc()):
+                        $mappedCat = isset($mapping[$s['kategori']]) ? $mapping[$s['kategori']] : $s['kategori'];
                     ?>
                     <tr class="hover:bg-white/5 transition-colors">
                         <td class="px-6 py-4 font-mono text-primary font-medium"><?php echo $s['kode']; ?></td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-border-dark text-xs"><?php echo $s['kategori']; ?></span></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-border-dark text-xs"><?php echo $mappedCat; ?></span></td>
                         <td class="px-6 py-4"><?php echo htmlspecialchars($s['nama']); ?></td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
