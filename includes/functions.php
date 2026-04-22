@@ -2,30 +2,58 @@
 include_once __DIR__ . '/../config/database.php';
 
 /**
+ * Get anatomical category mapping
+ */
+function getCategoryMapping() {
+    return [
+        'P01' => 'Buah',
+        'P06' => 'Buah',
+        'P03' => 'Batang',
+        'P04' => 'Batang',
+        'P05' => 'Batang',
+        'P02' => 'Daun',
+        'Buah' => 'Buah',
+        'Batang' => 'Batang',
+        'Daun' => 'Daun'
+    ];
+}
+
+/**
  * Get all symptoms grouped by category
  */
 function getSymptomsByCategory($conn) {
-    // Custom sort order for categories
-    $categories = ['Batang', 'Daun', 'Buah'];
+    // Mapping current categories (disease codes) to anatomical categories
+    $mapping = getCategoryMapping();
 
     $sql = "SELECT * FROM gejala ORDER BY kategori, kode";
     $result = $conn->query($sql);
     $symptoms = [];
+
     while ($row = $result->fetch_assoc()) {
-        $categoryLabel = 'Penyakit ' . $row['kategori'];
+        $rawCat = $row['kategori'];
+        $mappedCat = isset($mapping[$rawCat]) ? $mapping[$rawCat] : $rawCat;
+        $categoryLabel = 'Penyakit ' . $mappedCat;
         $symptoms[$categoryLabel][] = $row;
     }
 
     // Ensure the order is Batang, Daun, Buah if they exist
+    $categoriesOrder = ['Penyakit Batang', 'Penyakit Daun', 'Penyakit Buah'];
     $orderedSymptoms = [];
-    foreach ($categories as $cat) {
-        $label = 'Penyakit ' . $cat;
+
+    foreach ($categoriesOrder as $label) {
         if (isset($symptoms[$label])) {
             $orderedSymptoms[$label] = $symptoms[$label];
         }
     }
 
-    return !empty($orderedSymptoms) ? $orderedSymptoms : $symptoms;
+    // Include any other categories that might exist
+    foreach ($symptoms as $label => $data) {
+        if (!isset($orderedSymptoms[$label])) {
+            $orderedSymptoms[$label] = $data;
+        }
+    }
+
+    return $orderedSymptoms;
 }
 
 /**
