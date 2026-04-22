@@ -96,16 +96,17 @@ include 'includes/header.php';
                                     <th class="p-4 min-w-[200px]">Penyakit Terdeteksi</th>
                                     <th class="p-4 min-w-[180px]">Nilai CF (Kepastian)</th>
                                     <th class="p-4 min-w-[120px]">Status</th>
+                                    <th class="p-4 w-24">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-border-dark">
                                 <?php if (empty($history)): ?>
                                 <tr>
-                                    <td colspan="6" class="p-8 text-center text-slate-500">Belum ada riwayat diagnosa.</td>
+                                    <td colspan="7" class="p-8 text-center text-slate-500">Belum ada riwayat diagnosa.</td>
                                 </tr>
                                 <?php else: ?>
                                     <?php $no = 1; foreach ($history as $h): ?>
-                                    <tr class="group hover:bg-white/5 transition-colors">
+                                    <tr class="group hover:bg-white/5 transition-colors cursor-pointer" onclick="window.location.href='detail_riwayat.php?id=<?php echo $h['id']; ?>'">
                                         <td class="p-4 text-center text-slate-500 font-medium"><?php echo $no++; ?></td>
                                         <td class="p-4 text-white font-medium"><?php echo date('d M Y, H:i', strtotime($h['dibuat_pada'])); ?></td>
                                         <td class="p-4 text-slate-400"><?php echo htmlspecialchars($h['nama_pengguna']); ?></td>
@@ -119,6 +120,11 @@ include 'includes/header.php';
                                             <?php else: ?>
                                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-900/30 text-red-400 border border-red-800">Rendah</span>
                                             <?php endif; ?>
+                                        </td>
+                                        <td class="p-4">
+                                            <a href="detail_riwayat.php?id=<?php echo $h['id']; ?>" class="text-primary hover:text-green-400 transition-colors">
+                                                <span class="material-symbols-outlined">visibility</span>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
