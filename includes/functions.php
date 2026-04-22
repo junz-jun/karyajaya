@@ -5,6 +5,9 @@ include_once __DIR__ . '/../config/database.php';
  * Get all symptoms grouped by category
  */
 function getSymptomsByCategory($conn) {
+    // Custom sort order for categories
+    $categories = ['Batang', 'Daun', 'Buah'];
+
     $sql = "SELECT * FROM gejala ORDER BY kategori, kode";
     $result = $conn->query($sql);
     $symptoms = [];
@@ -12,7 +15,17 @@ function getSymptomsByCategory($conn) {
         $categoryLabel = 'Penyakit ' . $row['kategori'];
         $symptoms[$categoryLabel][] = $row;
     }
-    return $symptoms;
+
+    // Ensure the order is Batang, Daun, Buah if they exist
+    $orderedSymptoms = [];
+    foreach ($categories as $cat) {
+        $label = 'Penyakit ' . $cat;
+        if (isset($symptoms[$label])) {
+            $orderedSymptoms[$label] = $symptoms[$label];
+        }
+    }
+
+    return !empty($orderedSymptoms) ? $orderedSymptoms : $symptoms;
 }
 
 /**

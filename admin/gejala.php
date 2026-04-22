@@ -92,14 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="code" id="symptomCode" required placeholder="G01" class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
                 </div>
                 <div class="space-y-2">
-                    <label class="text-sm font-medium text-[#9db8a6]">Kategori (Penyakit)</label>
+                    <label class="text-sm font-medium text-[#9db8a6]">Kriteria Kategori</label>
                     <select name="category" id="symptomCategory" required class="w-full bg-[#1a261f] border border-[#29382e] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
-                        <?php
-                        $penyakitList = $conn->query("SELECT kode, nama FROM penyakit ORDER BY kode ASC");
-                        while ($p = $penyakitList->fetch_assoc()):
-                        ?>
-                        <option value="<?php echo $p['kode']; ?>"><?php echo $p['kode'] . ' - ' . $p['nama']; ?></option>
-                        <?php endwhile; ?>
+                        <option value="Batang">Batang</option>
+                        <option value="Daun">Daun</option>
+                        <option value="Buah">Buah</option>
                     </select>
                 </div>
             </div>
