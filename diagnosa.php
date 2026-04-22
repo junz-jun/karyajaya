@@ -81,7 +81,7 @@ include 'includes/header.php';
                                     <span class="p-2 rounded-lg bg-primary/10 text-primary">
                                         <span class="material-symbols-outlined">pest_control</span>
                                     </span>
-                                    <h3 class="text-lg font-semibold text-white">Penyakit: <?php echo $category; ?></h3>
+                                    <h3 class="text-lg font-semibold text-white"><?php echo $category; ?></h3>
                                 </div>
                                 <div class="space-y-4">
                                     <?php foreach ($symptoms as $s): ?>
